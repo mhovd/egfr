@@ -55,5 +55,5 @@ rate equation for the full age spectrum. Nephrol Dial Transplant.
 
 ``` r
 egfr_fas_cr(creatinine = 1.0, age = 50, sex = "female")
-#> [1] 69.4793
+#> [1] 66.56826
 ```
