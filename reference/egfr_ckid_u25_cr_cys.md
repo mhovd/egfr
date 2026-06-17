@@ -69,7 +69,9 @@ Pierce CB, et al. Kidney Int. 2021;99(4):948-956.
 ## Examples
 
 ``` r
-egfr_ckid_u25_cr_cys(creatinine = 0.6, cystatin = 0.8, age = 10,
-                     sex = "male", height = 140)
+egfr_ckid_u25_cr_cys(
+  creatinine = 0.6, cystatin = 0.8, age = 10,
+  sex = "male", height = 140
+)
 #> [1] 96.37958
 ```

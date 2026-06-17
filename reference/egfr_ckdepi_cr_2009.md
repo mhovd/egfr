@@ -72,6 +72,7 @@ glomerular filtration rate. Ann Intern Med. 2009;150(9):604-612.
 egfr_ckdepi_cr_2009(creatinine = 1.0, age = 50, sex = "female")
 #> [1] 65.63762
 egfr_ckdepi_cr_2009(1.0, 50, "female",
-                    ethnicity = "black", label_afroamerican = "black")
+  ethnicity = "black", label_afroamerican = "black"
+)
 #> [1] 76.07401
 ```

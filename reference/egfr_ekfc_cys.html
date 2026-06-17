@@ -43,7 +43,7 @@ cystatin C equation (Pottel et al., 2023).</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">egfr_ekfc_cys</span><span class="op">(</span><span class="va">cystatin</span>, <span class="va">age</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">egfr_ekfc_cys</span><span class="op">(</span><span class="va">cystatin</span>, <span class="va">age</span>, q <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -56,6 +56,13 @@ cystatin C equation (Pottel et al., 2023).</p>
 
 <dt id="arg-age">age<a class="anchor" aria-label="anchor" href="#arg-age"></a></dt>
 <dd><p>Numeric vector of age in years.</p></dd>
+
+
+<dt id="arg-q">q<a class="anchor" aria-label="anchor" href="#arg-q"></a></dt>
+<dd><p>Optional numeric vector of the reference cystatin C Q value
+(median cystatin C, in mg/L). When <code>NULL</code> (the default) the built-in
+age-based EKFC reference Q is used; supply a value to use a population- or
+individual-specific Q. Recycled to the length of the other inputs.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -73,6 +80,8 @@ estimate GFR without the inclusion of race and sex. N Engl J Med.
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">egfr_ekfc_cys</span><span class="op">(</span>cystatin <span class="op">=</span> <span class="fl">0.9</span>, age <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 88.54123</span>
+<span class="r-in"><span><span class="fu">egfr_ekfc_cys</span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">50</span>, q <span class="op">=</span> <span class="fl">0.85</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 90.96019</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -20,12 +20,14 @@ Useful links:
 
 - <https://github.com/mhovd/egfr>
 
+- <https://mhovd.github.io/egfr/>
+
 - Report bugs at <https://github.com/mhovd/egfr/issues>
 
 ## Author
 
-**Maintainer**: Markus Hovd <markus@example.com>
+**Maintainer**: Markus Hovd <markus@hovd.io> \[copyright holder\]
 
 Authors:
 
-- Markus Hovd <markus@example.com>
+- Markus Hovd <markus@hovd.io> \[copyright holder\]

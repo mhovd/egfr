@@ -62,7 +62,9 @@ Pierce CB, et al. Kidney Int. 2021;99(4):948-956.
 ## Examples
 
 ``` r
-egfr_ckid_u25_cr_extended(creatinine = 1.0, age = 28, sex = "female",
-                          height = 165)
+egfr_ckid_u25_cr_extended(
+  creatinine = 1.0, age = 28, sex = "female",
+  height = 165
+)
 #> [1] 67.29046
 ```

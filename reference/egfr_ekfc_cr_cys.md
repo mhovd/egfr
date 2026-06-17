@@ -16,7 +16,9 @@ egfr_ekfc_cr_cys(
   sex,
   creatinine_units = "mg/dl",
   label_sex_male = "male",
-  label_sex_female = "female"
+  label_sex_female = "female",
+  q_cr = NULL,
+  q_cys = NULL
 )
 ```
 
@@ -46,6 +48,20 @@ egfr_ekfc_cr_cys(
 
   Values in `sex` that denote male and female records. Defaults to
   `"male"`/`"female"`.
+
+- q_cr:
+
+  Optional numeric vector of the reference creatinine Q value (median
+  creatinine, in mg/dL) passed to
+  [`egfr_ekfc_cr()`](https://mhovd.github.io/egfr/reference/egfr_ekfc_cr.md).
+  `NULL` (default) uses the built-in EKFC reference Q.
+
+- q_cys:
+
+  Optional numeric vector of the reference cystatin C Q value (median
+  cystatin C, in mg/L) passed to
+  [`egfr_ekfc_cys()`](https://mhovd.github.io/egfr/reference/egfr_ekfc_cys.md).
+  `NULL` (default) uses the built-in EKFC reference Q.
 
 ## Value
 

@@ -59,7 +59,9 @@ Inker LA, Eneanya ND, Coresh J, et al. N Engl J Med.
 ## Examples
 
 ``` r
-egfr_ckdepi_cr_cys_2021(creatinine = 1.0, cystatin = 0.9,
-                        age = 50, sex = "female")
+egfr_ckdepi_cr_cys_2021(
+  creatinine = 1.0, cystatin = 0.9,
+  age = 50, sex = "female"
+)
 #> [1] 80.3607
 ```

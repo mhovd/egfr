@@ -52,7 +52,8 @@ the full age spectrum (2-120 years).</p>
 <span>  <span class="va">sex</span>,</span>
 <span>  creatinine_units <span class="op">=</span> <span class="st">"mg/dl"</span>,</span>
 <span>  label_sex_male <span class="op">=</span> <span class="st">"male"</span>,</span>
-<span>  label_sex_female <span class="op">=</span> <span class="st">"female"</span></span>
+<span>  label_sex_female <span class="op">=</span> <span class="st">"female"</span>,</span>
+<span>  q <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -81,6 +82,14 @@ the full age spectrum (2-120 years).</p>
 <dd><p>Values in <code>sex</code> that denote male and
 female records. Defaults to <code>"male"</code>/<code>"female"</code>.</p></dd>
 
+
+<dt id="arg-q">q<a class="anchor" aria-label="anchor" href="#arg-q"></a></dt>
+<dd><p>Optional numeric vector of the reference creatinine Q value
+(median creatinine for the age/sex, in mg/dL). When <code>NULL</code> (the default)
+the built-in EKFC reference Q is used; supply a value to use a
+population-, assay-, or individual-specific Q. Recycled to the length of
+the other inputs.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -100,6 +109,8 @@ estimate glomerular filtration rate. Ann Intern Med. 2021;174(2):183-191.
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 64.80412</span>
 <span class="r-in"><span><span class="fu">egfr_ekfc_cr</span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">8</span>, <span class="st">"male"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 76.30799</span>
+<span class="r-in"><span><span class="fu">egfr_ekfc_cr</span><span class="op">(</span><span class="fl">1.0</span>, <span class="fl">50</span>, <span class="st">"female"</span>, q <span class="op">=</span> <span class="fl">0.72</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 66.904</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -6,7 +6,7 @@ cystatin C equation (Pottel et al., 2023).
 ## Usage
 
 ``` r
-egfr_ekfc_cys(cystatin, age)
+egfr_ekfc_cys(cystatin, age, q = NULL)
 ```
 
 ## Arguments
@@ -18,6 +18,13 @@ egfr_ekfc_cys(cystatin, age)
 - age:
 
   Numeric vector of age in years.
+
+- q:
+
+  Optional numeric vector of the reference cystatin C Q value (median
+  cystatin C, in mg/L). When `NULL` (the default) the built-in age-based
+  EKFC reference Q is used; supply a value to use a population- or
+  individual-specific Q. Recycled to the length of the other inputs.
 
 ## Value
 
@@ -35,4 +42,6 @@ GFR without the inclusion of race and sex. N Engl J Med.
 ``` r
 egfr_ekfc_cys(cystatin = 0.9, age = 50)
 #> [1] 88.54123
+egfr_ekfc_cys(0.9, 50, q = 0.85)
+#> [1] 90.96019
 ```
