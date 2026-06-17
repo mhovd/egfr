@@ -9,7 +9,7 @@ unit conversion.
 The package is inspired by the
 [`kidney.epi`](https://cran.r-project.org/package=kidney.epi) package
 and was ported from the equation set used by
-[eGFR.app](https://github.com/mhovd/egfr-app).
+[eGFR.app](https://egfr.app).
 
 > These equations are screening tools and are **not** a substitute for
 > measured GFR or clinical judgement.
