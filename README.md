@@ -6,6 +6,7 @@
 [![Codecov test coverage](https://codecov.io/gh/mhovd/egfr/graph/badge.svg)](https://app.codecov.io/gh/mhovd/egfr)
 <!-- badges: end -->
 
+
 **egfr** is a vectorised R toolkit for estimating glomerular filtration
 rate (eGFR) and creatinine clearance from serum creatinine, cystatin C, or
 both. It implements 20 validated adult, paediatric, and neonatal equations,
@@ -19,6 +20,14 @@ ported from the equation set used by [eGFR.app](https://egfr.app).
 > GFR or clinical judgement.
 
 ## Installation
+
+Install the released version from [R-universe](https://mhovd.r-universe.dev/egfr):
+
+```r
+install.packages("egfr", repos = "https://mhovd.r-universe.dev")
+```
+
+Or install the development version from GitHub:
 
 ```r
 # install.packages("remotes")
