@@ -25,6 +25,20 @@ test_that("FAS at SCr == Q and age <= 40 returns 107.3", {
   expect_equal(egfr_fas_cr(0.9, 30, "male"), 107.3, tolerance = 1e-6)
 })
 
+test_that("FAS for age > 40 applies the 0.988^(age-40) decay to 107.3/(SCr/Q)", {
+  # Published Pottel 2016 form: 107.3 / (SCr/Q) * 0.988^(age - 40)
+  expect_equal(
+    egfr_fas_cr(1.5, 50, "male"),
+    107.3 / (1.5 / 0.9) * 0.988^(50 - 40),
+    tolerance = 1e-6
+  )
+  expect_equal(
+    egfr_fas_cr(1.2, 70, "female"),
+    107.3 / (1.2 / 0.7) * 0.988^(70 - 40),
+    tolerance = 1e-6
+  )
+})
+
 test_that("Lund-Malmo returns finite positive values", {
   out <- egfr_lund_malmo(c(0.9, 1.5), c(50, 70), c("female", "male"))
   expect_true(all(out > 0 & is.finite(out)))

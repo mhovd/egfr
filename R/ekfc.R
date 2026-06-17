@@ -158,7 +158,7 @@ egfr_fas_cr <- function(creatinine, age, sex,
   ratio <- scr / q
   egfr <- ifelse(age <= 40,
     107.3 / ratio,
-    107.3 * ratio^(-0.88) * 0.988^(age - 40)
+    107.3 / ratio * 0.988^(age - 40)
   )
   egfr[is.na(sex)] <- NA_real_
   egfr
