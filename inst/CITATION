@@ -1,0 +1,9 @@
+bibentry(
+  bibtype  = "Manual",
+  title    = "{egfr}: Estimated Glomerular Filtration Rate (eGFR) Calculators",
+  author   = person("Markus", "Hovd"),
+  year     = "2026",
+  note     = "R package version 0.1.0",
+  url      = "https://github.com/mhovd/egfr",
+  header   = "To cite the egfr package in publications use:"
+)

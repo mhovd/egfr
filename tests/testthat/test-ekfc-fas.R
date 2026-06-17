@@ -1,5 +1,5 @@
 test_that("EKFC combined equals the mean of its components", {
-  cr  <- egfr_ekfc_cr(1.0, 50, "female")
+  cr <- egfr_ekfc_cr(1.0, 50, "female")
   cys <- egfr_ekfc_cys(0.9, 50)
   expect_equal(
     egfr_ekfc_cr_cys(1.0, 0.9, 50, "female"),
@@ -10,7 +10,7 @@ test_that("EKFC combined equals the mean of its components", {
 test_that("EKFC creatinine applies the over-40 age correction", {
   # At the median ratio (SCr == Q) the base eGFR is exactly 107.3 before
   # the age correction.
-  young <- egfr_ekfc_cr(0.7, 40, "female")   # no correction at age 40
+  young <- egfr_ekfc_cr(0.7, 40, "female") # no correction at age 40
   expect_equal(young, 107.3, tolerance = 1e-6)
   older <- egfr_ekfc_cr(0.7, 50, "female")
   expect_equal(older, 107.3 * 0.990^10, tolerance = 1e-6)

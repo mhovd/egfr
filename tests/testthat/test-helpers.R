@@ -5,7 +5,7 @@ test_that("bsa methods return expected Du Bois value", {
 })
 
 test_that("gfr_bsa_adjust round-trips", {
-  absolute   <- gfr_bsa_adjust(68.6, bsa = 2.0, to = "absolute")
+  absolute <- gfr_bsa_adjust(68.6, bsa = 2.0, to = "absolute")
   normalized <- gfr_bsa_adjust(absolute, bsa = 2.0, to = "normalized")
   expect_equal(normalized, 68.6, tolerance = 1e-9)
 })

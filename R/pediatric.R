@@ -22,7 +22,8 @@ egfr_schwartz <- function(creatinine, height,
   scr <- .egfr_creatinine_to_mgdl(creatinine, creatinine_units)
   height_cm <- .egfr_height_to_cm(height, height_units)
   parts <- .egfr_recycle(scr, height_cm)
-  scr <- parts[[1]]; height_cm <- parts[[2]]
+  scr <- parts[[1]]
+  height_cm <- parts[[2]]
   height_m <- height_cm / 100
   41.3 * height_m / scr
 }
@@ -33,13 +34,19 @@ egfr_schwartz <- function(creatinine, height,
   female <- ifelse(
     age < 12, 36.1 * 1.008^(age - 12),
     ifelse(age < 18, 36.1 * 1.023^(age - 12),
-    ifelse(age <= 25, 41.4,
-           if (extended) 41.4 * 0.995^(age - 25) else 41.4)))
+      ifelse(age <= 25, 41.4,
+        if (extended) 41.4 * 0.995^(age - 25) else 41.4
+      )
+    )
+  )
   male <- ifelse(
     age < 12, 39.0 * 1.008^(age - 12),
     ifelse(age < 18, 39.0 * 1.045^(age - 12),
-    ifelse(age <= 25, 50.8,
-           if (extended) 50.8 * 0.995^(age - 25) else 50.8)))
+      ifelse(age <= 25, 50.8,
+        if (extended) 50.8 * 0.995^(age - 25) else 50.8
+      )
+    )
+  )
   ifelse(sex == "female", female, male)
 }
 
@@ -70,7 +77,10 @@ egfr_ckid_u25_cr <- function(creatinine, age, sex, height,
   height_cm <- .egfr_height_to_cm(height, height_units)
   sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
   parts <- .egfr_recycle(scr, age, sex, height_cm)
-  scr <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]; height_cm <- parts[[4]]
+  scr <- parts[[1]]
+  age <- parts[[2]]
+  sex <- parts[[3]]
+  height_cm <- parts[[4]]
 
   kappa <- .egfr_ckid_kappa_cr(age, sex, extended = FALSE)
   egfr <- kappa * ((height_cm / 100) / scr)
@@ -88,8 +98,10 @@ egfr_ckid_u25_cr <- function(creatinine, age, sex, height,
 #' @references Pierce CB, et al. Kidney Int. 2021;99(4):948-956.
 #'   \doi{10.1016/j.kint.2020.10.047}
 #' @examples
-#' egfr_ckid_u25_cr_extended(creatinine = 1.0, age = 28, sex = "female",
-#'                           height = 165)
+#' egfr_ckid_u25_cr_extended(
+#'   creatinine = 1.0, age = 28, sex = "female",
+#'   height = 165
+#' )
 #' @export
 egfr_ckid_u25_cr_extended <- function(creatinine, age, sex, height,
                                       creatinine_units = "mg/dl",
@@ -100,7 +112,10 @@ egfr_ckid_u25_cr_extended <- function(creatinine, age, sex, height,
   height_cm <- .egfr_height_to_cm(height, height_units)
   sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
   parts <- .egfr_recycle(scr, age, sex, height_cm)
-  scr <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]; height_cm <- parts[[4]]
+  scr <- parts[[1]]
+  age <- parts[[2]]
+  sex <- parts[[3]]
+  height_cm <- parts[[4]]
 
   kappa <- .egfr_ckid_kappa_cr(age, sex, extended = TRUE)
   egfr <- kappa * ((height_cm / 100) / scr)
@@ -113,10 +128,12 @@ egfr_ckid_u25_cr_extended <- function(creatinine, age, sex, height,
 .egfr_ckid_kappa_cys <- function(age, sex) {
   female <- ifelse(
     age < 12, 79.9 * 1.004^(age - 12),
-    ifelse(age < 18, 79.9 * 0.974^(age - 12), 68.3))
+    ifelse(age < 18, 79.9 * 0.974^(age - 12), 68.3)
+  )
   male <- ifelse(
     age < 15, 87.2 * 1.011^(age - 15),
-    ifelse(age < 18, 87.2 * 0.960^(age - 15), 77.1))
+    ifelse(age < 18, 87.2 * 0.960^(age - 15), 77.1)
+  )
   ifelse(sex == "female", female, male)
 }
 
@@ -138,7 +155,9 @@ egfr_ckid_u25_cys <- function(cystatin, age, sex,
                               label_sex_female = "female") {
   sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
   parts <- .egfr_recycle(cystatin, age, sex)
-  cystatin <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]
+  cystatin <- parts[[1]]
+  age <- parts[[2]]
+  sex <- parts[[3]]
 
   kappa <- .egfr_ckid_kappa_cys(age, sex)
   egfr <- kappa * (1 / cystatin)
@@ -157,8 +176,10 @@ egfr_ckid_u25_cys <- function(cystatin, age, sex,
 #' @references Pierce CB, et al. Kidney Int. 2021;99(4):948-956.
 #'   \doi{10.1016/j.kint.2020.10.047}
 #' @examples
-#' egfr_ckid_u25_cr_cys(creatinine = 0.6, cystatin = 0.8, age = 10,
-#'                      sex = "male", height = 140)
+#' egfr_ckid_u25_cr_cys(
+#'   creatinine = 0.6, cystatin = 0.8, age = 10,
+#'   sex = "male", height = 140
+#' )
 #' @export
 egfr_ckid_u25_cr_cys <- function(creatinine, cystatin, age, sex, height,
                                  creatinine_units = "mg/dl",
@@ -166,13 +187,15 @@ egfr_ckid_u25_cr_cys <- function(creatinine, cystatin, age, sex, height,
                                  label_sex_male = "male",
                                  label_sex_female = "female") {
   cr <- egfr_ckid_u25_cr(creatinine, age, sex, height,
-                         creatinine_units = creatinine_units,
-                         height_units = height_units,
-                         label_sex_male = label_sex_male,
-                         label_sex_female = label_sex_female)
+    creatinine_units = creatinine_units,
+    height_units = height_units,
+    label_sex_male = label_sex_male,
+    label_sex_female = label_sex_female
+  )
   cys <- egfr_ckid_u25_cys(cystatin, age, sex,
-                           label_sex_male = label_sex_male,
-                           label_sex_female = label_sex_female)
+    label_sex_male = label_sex_male,
+    label_sex_female = label_sex_female
+  )
   (cr + cys) / 2
 }
 
@@ -193,7 +216,8 @@ egfr_ckid_u25_cr_cys <- function(creatinine, cystatin, age, sex, height,
 #' @export
 egfr_capa <- function(cystatin, age) {
   parts <- .egfr_recycle(cystatin, age)
-  cystatin <- parts[[1]]; age <- parts[[2]]
+  cystatin <- parts[[1]]
+  age <- parts[[2]]
   130 * cystatin^(-1.069) * age^(-0.117) - 7
 }
 
@@ -216,6 +240,7 @@ egfr_neonatal <- function(creatinine, height,
   scr <- .egfr_creatinine_to_mgdl(creatinine, creatinine_units)
   height_cm <- .egfr_height_to_cm(height, height_units)
   parts <- .egfr_recycle(scr, height_cm)
-  scr <- parts[[1]]; height_cm <- parts[[2]]
+  scr <- parts[[1]]
+  height_cm <- parts[[2]]
   0.31 * height_cm / scr
 }

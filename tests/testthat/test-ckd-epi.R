@@ -8,7 +8,7 @@ test_that("CKD-EPI 2021 creatinine matches a known reference value", {
 })
 
 test_that("creatinine unit choice does not change the result", {
-  mgdl  <- egfr_ckdepi_cr_2021(1.0, 50, "female", creatinine_units = "mg/dl")
+  mgdl <- egfr_ckdepi_cr_2021(1.0, 50, "female", creatinine_units = "mg/dl")
   umoll <- egfr_ckdepi_cr_2021(88.4, 50, "female", creatinine_units = "umol/l")
   expect_equal(mgdl, umoll)
 })
@@ -30,15 +30,17 @@ test_that("unrecognised sex yields NA with a warning", {
 
 test_that("custom sex labels work", {
   out <- egfr_ckdepi_cr_2021(1.0, 50, "F",
-                             label_sex_female = "F", label_sex_male = "M")
+    label_sex_female = "F", label_sex_male = "M"
+  )
   expect_equal(out, 68.6, tolerance = 0.1)
 })
 
 test_that("CKD-EPI 2009 race coefficient is applied only when requested", {
-  base  <- egfr_ckdepi_cr_2009(1.0, 50, "female")
+  base <- egfr_ckdepi_cr_2009(1.0, 50, "female")
   black <- egfr_ckdepi_cr_2009(1.0, 50, "female",
-                               ethnicity = "black",
-                               label_afroamerican = "black")
+    ethnicity = "black",
+    label_afroamerican = "black"
+  )
   expect_equal(black / base, 1.159, tolerance = 1e-6)
 })
 

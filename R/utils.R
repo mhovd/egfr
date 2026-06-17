@@ -45,12 +45,16 @@
   units <- tolower(trimws(units))
   if (units %in% c("mg/dl", "mgdl", "mg/dL")) {
     creatinine
-  } else if (units %in% c("umol/l", "\u00b5mol/l", "micromol/l", "mcmol/l",
-                          "umoll", "umol")) {
+  } else if (units %in% c(
+    "umol/l", "\u00b5mol/l", "micromol/l", "mcmol/l",
+    "umoll", "umol"
+  )) {
     creatinine / 88.4
   } else {
     stop("Unsupported 'creatinine_units': ", shQuote(units),
-         ". Use 'mg/dl' or 'umol/l'.", call. = FALSE)
+      ". Use 'mg/dl' or 'umol/l'.",
+      call. = FALSE
+    )
   }
 }
 
@@ -64,7 +68,9 @@
     height * 100
   } else {
     stop("Unsupported 'height_units': ", shQuote(units),
-         ". Use 'cm' or 'm'.", call. = FALSE)
+      ". Use 'cm' or 'm'.",
+      call. = FALSE
+    )
   }
 }
 
@@ -77,7 +83,9 @@
   bad <- lens != 1L & lens != n
   if (any(bad)) {
     stop("All arguments must have length 1 or a common length; got lengths ",
-         paste(lens, collapse = ", "), ".", call. = FALSE)
+      paste(lens, collapse = ", "), ".",
+      call. = FALSE
+    )
   }
   lapply(args, function(x) if (length(x) == 1L) rep(x, n) else x)
 }

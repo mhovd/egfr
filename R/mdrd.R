@@ -23,16 +23,21 @@ egfr_mdrd <- function(creatinine, age, sex,
 
   if (is.null(ethnicity)) {
     parts <- .egfr_recycle(scr, age, sex)
-    scr <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]
-    raceFactor <- rep(1, length(scr))
+    scr <- parts[[1]]
+    age <- parts[[2]]
+    sex <- parts[[3]]
+    race_factor <- rep(1, length(scr))
   } else {
     parts <- .egfr_recycle(scr, age, sex, ethnicity)
-    scr <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]; ethnicity <- parts[[4]]
-    raceFactor <- ifelse(ethnicity %in% label_afroamerican, 1.212, 1.000)
+    scr <- parts[[1]]
+    age <- parts[[2]]
+    sex <- parts[[3]]
+    ethnicity <- parts[[4]]
+    race_factor <- ifelse(ethnicity %in% label_afroamerican, 1.212, 1.000)
   }
 
-  sexFactor <- ifelse(sex == "female", 0.742, 1.000)
-  egfr <- 175 * scr^(-1.154) * age^(-0.203) * sexFactor * raceFactor
+  sex_factor <- ifelse(sex == "female", 0.742, 1.000)
+  egfr <- 175 * scr^(-1.154) * age^(-0.203) * sex_factor * race_factor
   egfr[is.na(sex)] <- NA_real_
   egfr
 }
@@ -59,10 +64,13 @@ egfr_cockcroft_gault <- function(creatinine, age, sex, weight,
   scr <- .egfr_creatinine_to_mgdl(creatinine, creatinine_units)
   sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
   parts <- .egfr_recycle(scr, age, sex, weight)
-  scr <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]; weight <- parts[[4]]
+  scr <- parts[[1]]
+  age <- parts[[2]]
+  sex <- parts[[3]]
+  weight <- parts[[4]]
 
-  sexFactor <- ifelse(sex == "female", 0.85, 1.00)
-  crcl <- ((140 - age) * weight) / (72 * scr) * sexFactor
+  sex_factor <- ifelse(sex == "female", 0.85, 1.00)
+  crcl <- ((140 - age) * weight) / (72 * scr) * sex_factor
   crcl[is.na(sex)] <- NA_real_
   crcl
 }

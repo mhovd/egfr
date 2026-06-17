@@ -20,11 +20,13 @@
 bsa <- function(weight, height, method = c("dubois", "haycock", "mosteller")) {
   method <- match.arg(method)
   parts <- .egfr_recycle(weight, height)
-  weight <- parts[[1]]; height <- parts[[2]]
+  weight <- parts[[1]]
+  height <- parts[[2]]
   switch(method,
     dubois    = 0.007184 * weight^0.425 * height^0.725,
     haycock   = 0.024265 * weight^0.5378 * height^0.3964,
-    mosteller = sqrt(weight * height / 3600))
+    mosteller = sqrt(weight * height / 3600)
+  )
 }
 
 #' Normalise or de-normalise GFR using body surface area
@@ -45,7 +47,8 @@ bsa <- function(weight, height, method = c("dubois", "haycock", "mosteller")) {
 gfr_bsa_adjust <- function(gfr, bsa, to = c("normalized", "absolute")) {
   to <- match.arg(to)
   parts <- .egfr_recycle(gfr, bsa)
-  gfr <- parts[[1]]; bsa <- parts[[2]]
+  gfr <- parts[[1]]
+  bsa <- parts[[2]]
   if (to == "normalized") gfr * (1.73 / bsa) else gfr * (bsa / 1.73)
 }
 
@@ -90,6 +93,8 @@ convert_creatinine <- function(creatinine, from = "mg/dl", to = "umol/l") {
     mgdl * 88.4
   } else {
     stop("Unsupported 'to' units: ", shQuote(to),
-         ". Use 'mg/dl' or 'umol/l'.", call. = FALSE)
+      ". Use 'mg/dl' or 'umol/l'.",
+      call. = FALSE
+    )
   }
 }

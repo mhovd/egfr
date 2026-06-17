@@ -1,0 +1,9 @@
+linters: linters_with_defaults(
+    line_length_linter(100L),
+    object_name_linter(styles = c("snake_case", "symbols")),
+    commented_code_linter = NULL
+  )
+encoding: "UTF-8"
+exclusions: list(
+    "tests"
+  )

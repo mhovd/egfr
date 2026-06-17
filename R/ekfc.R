@@ -4,26 +4,40 @@
   # Paediatric age bands replicate the published EKFC/FAS Q reference values.
   q_male <- function(a) {
     ifelse(a < 2, 0.20,
-    ifelse(a < 5, 0.27,
-    ifelse(a < 7, 0.32,
-    ifelse(a < 9, 0.37,
-    ifelse(a < 11, 0.43,
-    ifelse(a < 13, 0.52,
-    ifelse(a < 15, 0.65,
-    ifelse(a < 17, 0.78, 0.85))))))))
+      ifelse(a < 5, 0.27,
+        ifelse(a < 7, 0.32,
+          ifelse(a < 9, 0.37,
+            ifelse(a < 11, 0.43,
+              ifelse(a < 13, 0.52,
+                ifelse(a < 15, 0.65,
+                  ifelse(a < 17, 0.78, 0.85)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
   }
   q_female <- function(a) {
     ifelse(a < 2, 0.20,
-    ifelse(a < 5, 0.27,
-    ifelse(a < 7, 0.32,
-    ifelse(a < 9, 0.36,
-    ifelse(a < 11, 0.41,
-    ifelse(a < 13, 0.47,
-    ifelse(a < 15, 0.55,
-    ifelse(a < 17, 0.62, 0.67))))))))
+      ifelse(a < 5, 0.27,
+        ifelse(a < 7, 0.32,
+          ifelse(a < 9, 0.36,
+            ifelse(a < 11, 0.41,
+              ifelse(a < 13, 0.47,
+                ifelse(a < 15, 0.55,
+                  ifelse(a < 17, 0.62, 0.67)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
   }
   adult_q <- ifelse(sex == "female", 0.70, 0.90)
-  ped_q   <- ifelse(sex == "female", q_female(age), q_male(age))
+  ped_q <- ifelse(sex == "female", q_female(age), q_male(age))
   ifelse(age < 18, ped_q, adult_q)
 }
 
@@ -50,10 +64,12 @@ egfr_ekfc_cr <- function(creatinine, age, sex,
   scr <- .egfr_creatinine_to_mgdl(creatinine, creatinine_units)
   sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
   parts <- .egfr_recycle(scr, age, sex)
-  scr <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]
+  scr <- parts[[1]]
+  age <- parts[[2]]
+  sex <- parts[[3]]
 
-  Q <- .egfr_ekfc_q_cr(age, sex)
-  ratio <- scr / Q
+  q <- .egfr_ekfc_q_cr(age, sex)
+  ratio <- scr / q
   alpha <- ifelse(ratio < 1, -0.322, -1.132)
   egfr <- 107.3 * ratio^alpha
   egfr <- ifelse(age > 40, egfr * 0.990^(age - 40), egfr)
@@ -77,10 +93,11 @@ egfr_ekfc_cr <- function(creatinine, age, sex,
 #' @export
 egfr_ekfc_cys <- function(cystatin, age) {
   parts <- .egfr_recycle(cystatin, age)
-  cystatin <- parts[[1]]; age <- parts[[2]]
+  cystatin <- parts[[1]]
+  age <- parts[[2]]
 
-  Q <- ifelse(age <= 50, 0.83, 0.83 + 0.005 * (age - 50))
-  ratio <- cystatin / Q
+  q <- ifelse(age <= 50, 0.83, 0.83 + 0.005 * (age - 50))
+  ratio <- cystatin / q
   alpha <- ifelse(ratio < 1, -0.322, -1.132)
   egfr <- 107.3 * ratio^alpha
   ifelse(age > 40, egfr * 0.990^(age - 40), egfr)
@@ -104,9 +121,10 @@ egfr_ekfc_cr_cys <- function(creatinine, cystatin, age, sex,
                              label_sex_male = "male",
                              label_sex_female = "female") {
   cr <- egfr_ekfc_cr(creatinine, age, sex,
-                     creatinine_units = creatinine_units,
-                     label_sex_male = label_sex_male,
-                     label_sex_female = label_sex_female)
+    creatinine_units = creatinine_units,
+    label_sex_male = label_sex_male,
+    label_sex_female = label_sex_female
+  )
   cys <- egfr_ekfc_cys(cystatin, age)
   (cr + cys) / 2
 }
@@ -132,13 +150,16 @@ egfr_fas_cr <- function(creatinine, age, sex,
   scr <- .egfr_creatinine_to_mgdl(creatinine, creatinine_units)
   sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
   parts <- .egfr_recycle(scr, age, sex)
-  scr <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]
+  scr <- parts[[1]]
+  age <- parts[[2]]
+  sex <- parts[[3]]
 
-  Q <- ifelse(sex == "female", 0.7, 0.9)
-  ratio <- scr / Q
+  q <- ifelse(sex == "female", 0.7, 0.9)
+  ratio <- scr / q
   egfr <- ifelse(age <= 40,
-                 107.3 / ratio,
-                 107.3 * ratio^(-0.88) * 0.988^(age - 40))
+    107.3 / ratio,
+    107.3 * ratio^(-0.88) * 0.988^(age - 40)
+  )
   egfr[is.na(sex)] <- NA_real_
   egfr
 }
@@ -165,17 +186,21 @@ egfr_lund_malmo <- function(creatinine, age, sex,
   scr <- .egfr_creatinine_to_mgdl(creatinine, creatinine_units)
   sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
   parts <- .egfr_recycle(scr, age, sex)
-  scr <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]
+  scr <- parts[[1]]
+  age <- parts[[2]]
+  sex <- parts[[3]]
 
-  pcr <- scr * 88.4  # convert mg/dL to umol/L
-  X_female <- ifelse(pcr < 150,
-                     2.50 + 0.0121 * (150 - pcr),
-                     2.50 - 0.926 * log(pcr / 150))
-  X_male <- ifelse(pcr < 180,
-                   2.56 + 0.00968 * (180 - pcr),
-                   2.56 - 0.926 * log(pcr / 180))
-  X <- ifelse(sex == "female", X_female, X_male)
-  egfr <- exp(X - 0.0158 * age + 0.438 * log(age))
+  pcr <- scr * 88.4 # convert mg/dL to umol/L
+  x_female <- ifelse(pcr < 150,
+    2.50 + 0.0121 * (150 - pcr),
+    2.50 - 0.926 * log(pcr / 150)
+  )
+  x_male <- ifelse(pcr < 180,
+    2.56 + 0.00968 * (180 - pcr),
+    2.56 - 0.926 * log(pcr / 180)
+  )
+  x <- ifelse(sex == "female", x_female, x_male)
+  egfr <- exp(x - 0.0158 * age + 0.438 * log(age))
   egfr[is.na(sex)] <- NA_real_
   egfr
 }
@@ -200,10 +225,12 @@ egfr_bis_cr <- function(creatinine, age, sex,
   scr <- .egfr_creatinine_to_mgdl(creatinine, creatinine_units)
   sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
   parts <- .egfr_recycle(scr, age, sex)
-  scr <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]
+  scr <- parts[[1]]
+  age <- parts[[2]]
+  sex <- parts[[3]]
 
-  sexFactor <- ifelse(sex == "female", 0.82, 1.00)
-  egfr <- 3736 * scr^(-0.87) * age^(-0.95) * sexFactor
+  sex_factor <- ifelse(sex == "female", 0.82, 1.00)
+  egfr <- 3736 * scr^(-0.87) * age^(-0.95) * sex_factor
   egfr[is.na(sex)] <- NA_real_
   egfr
 }

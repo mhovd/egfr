@@ -11,7 +11,7 @@ test_that("Schwartz accepts height in metres", {
 })
 
 test_that("CKiD U25 combined equals the mean of its components", {
-  cr  <- egfr_ckid_u25_cr(0.6, 10, "male", height = 140)
+  cr <- egfr_ckid_u25_cr(0.6, 10, "male", height = 140)
   cys <- egfr_ckid_u25_cys(0.8, 10, "male")
   expect_equal(
     egfr_ckid_u25_cr_cys(0.6, 0.8, 10, "male", height = 140),
@@ -30,7 +30,7 @@ test_that("CKiD U25 adult-plateau kappa is used for ages 18-25", {
 
 test_that("CKiD U25 extended continues past age 25", {
   base <- egfr_ckid_u25_cr(1.0, 25, "female", height = 165)
-  ext  <- egfr_ckid_u25_cr_extended(1.0, 28, "female", height = 165)
+  ext <- egfr_ckid_u25_cr_extended(1.0, 28, "female", height = 165)
   # extended kappa decays at 0.995^(age-25)
   expect_lt(ext, base)
 })

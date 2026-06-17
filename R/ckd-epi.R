@@ -27,18 +27,20 @@ egfr_ckdepi_cr_2021 <- function(creatinine, age, sex,
   scr <- .egfr_creatinine_to_mgdl(creatinine, creatinine_units)
   sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
   parts <- .egfr_recycle(scr, age, sex)
-  scr <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]
+  scr <- parts[[1]]
+  age <- parts[[2]]
+  sex <- parts[[3]]
 
-  kappa     <- ifelse(sex == "female", 0.7, 0.9)
-  alpha     <- ifelse(sex == "female", -0.241, -0.302)
-  sexFactor <- ifelse(sex == "female", 1.012, 1.000)
+  kappa <- ifelse(sex == "female", 0.7, 0.9)
+  alpha <- ifelse(sex == "female", -0.241, -0.302)
+  sex_factor <- ifelse(sex == "female", 1.012, 1.000)
 
   ratio <- scr / kappa
   egfr <- 142 *
     pmin(ratio, 1)^alpha *
     pmax(ratio, 1)^(-1.200) *
     0.9938^age *
-    sexFactor
+    sex_factor
   egfr[is.na(sex)] <- NA_real_
   egfr
 }
@@ -63,15 +65,17 @@ egfr_ckdepi_cys_2021 <- function(cystatin, age, sex,
                                  label_sex_female = "female") {
   sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
   parts <- .egfr_recycle(cystatin, age, sex)
-  cystatin <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]
+  cystatin <- parts[[1]]
+  age <- parts[[2]]
+  sex <- parts[[3]]
 
-  sexFactor <- ifelse(sex == "female", 0.932, 1.000)
+  sex_factor <- ifelse(sex == "female", 0.932, 1.000)
   ratio <- cystatin / 0.8
   egfr <- 133 *
     pmin(ratio, 1)^(-0.499) *
     pmax(ratio, 1)^(-1.328) *
     0.9962^age *
-    sexFactor
+    sex_factor
   egfr[is.na(sex)] <- NA_real_
   egfr
 }
@@ -94,8 +98,9 @@ egfr_ckdepi_cys_2012 <- function(cystatin, age, sex,
                                  label_sex_male = "male",
                                  label_sex_female = "female") {
   egfr_ckdepi_cys_2021(cystatin, age, sex,
-                       label_sex_male = label_sex_male,
-                       label_sex_female = label_sex_female)
+    label_sex_male = label_sex_male,
+    label_sex_female = label_sex_female
+  )
 }
 
 #' CKD-EPI 2021 combined creatinine + cystatin C eGFR (race-free)
@@ -111,8 +116,10 @@ egfr_ckdepi_cys_2012 <- function(cystatin, age, sex,
 #' @references Inker LA, Eneanya ND, Coresh J, et al. N Engl J Med.
 #'   2021;385(19):1737-1749. \doi{10.1056/NEJMoa2102953}
 #' @examples
-#' egfr_ckdepi_cr_cys_2021(creatinine = 1.0, cystatin = 0.9,
-#'                         age = 50, sex = "female")
+#' egfr_ckdepi_cr_cys_2021(
+#'   creatinine = 1.0, cystatin = 0.9,
+#'   age = 50, sex = "female"
+#' )
 #' @export
 egfr_ckdepi_cr_cys_2021 <- function(creatinine, cystatin, age, sex,
                                     creatinine_units = "mg/dl",
@@ -121,21 +128,24 @@ egfr_ckdepi_cr_cys_2021 <- function(creatinine, cystatin, age, sex,
   scr <- .egfr_creatinine_to_mgdl(creatinine, creatinine_units)
   sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
   parts <- .egfr_recycle(scr, cystatin, age, sex)
-  scr <- parts[[1]]; cystatin <- parts[[2]]; age <- parts[[3]]; sex <- parts[[4]]
+  scr <- parts[[1]]
+  cystatin <- parts[[2]]
+  age <- parts[[3]]
+  sex <- parts[[4]]
 
-  kappa     <- ifelse(sex == "female", 0.7, 0.9)
-  alpha     <- ifelse(sex == "female", -0.219, -0.144)
-  sexFactor <- ifelse(sex == "female", 0.963, 1.000)
+  kappa <- ifelse(sex == "female", 0.7, 0.9)
+  alpha <- ifelse(sex == "female", -0.219, -0.144)
+  sex_factor <- ifelse(sex == "female", 0.963, 1.000)
 
-  crRatio  <- scr / kappa
-  cysRatio <- cystatin / 0.8
+  cr_ratio <- scr / kappa
+  cys_ratio <- cystatin / 0.8
   egfr <- 135 *
-    pmin(crRatio, 1)^alpha *
-    pmax(crRatio, 1)^(-0.544) *
-    pmin(cysRatio, 1)^(-0.323) *
-    pmax(cysRatio, 1)^(-0.778) *
+    pmin(cr_ratio, 1)^alpha *
+    pmax(cr_ratio, 1)^(-0.544) *
+    pmin(cys_ratio, 1)^(-0.323) *
+    pmax(cys_ratio, 1)^(-0.778) *
     0.9961^age *
-    sexFactor
+    sex_factor
   egfr[is.na(sex)] <- NA_real_
   egfr
 }
@@ -161,7 +171,8 @@ egfr_ckdepi_cr_cys_2021 <- function(creatinine, cystatin, age, sex,
 #' @examples
 #' egfr_ckdepi_cr_2009(creatinine = 1.0, age = 50, sex = "female")
 #' egfr_ckdepi_cr_2009(1.0, 50, "female",
-#'                     ethnicity = "black", label_afroamerican = "black")
+#'   ethnicity = "black", label_afroamerican = "black"
+#' )
 #' @export
 egfr_ckdepi_cr_2009 <- function(creatinine, age, sex,
                                 ethnicity = NULL,
@@ -174,25 +185,30 @@ egfr_ckdepi_cr_2009 <- function(creatinine, age, sex,
 
   if (is.null(ethnicity)) {
     parts <- .egfr_recycle(scr, age, sex)
-    scr <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]
-    raceFactor <- rep(1, length(scr))
+    scr <- parts[[1]]
+    age <- parts[[2]]
+    sex <- parts[[3]]
+    race_factor <- rep(1, length(scr))
   } else {
     parts <- .egfr_recycle(scr, age, sex, ethnicity)
-    scr <- parts[[1]]; age <- parts[[2]]; sex <- parts[[3]]; ethnicity <- parts[[4]]
-    raceFactor <- ifelse(ethnicity %in% label_afroamerican, 1.159, 1.000)
+    scr <- parts[[1]]
+    age <- parts[[2]]
+    sex <- parts[[3]]
+    ethnicity <- parts[[4]]
+    race_factor <- ifelse(ethnicity %in% label_afroamerican, 1.159, 1.000)
   }
 
-  kappa     <- ifelse(sex == "female", 0.7, 0.9)
-  alpha     <- ifelse(sex == "female", -0.329, -0.411)
-  sexFactor <- ifelse(sex == "female", 1.018, 1.000)
+  kappa <- ifelse(sex == "female", 0.7, 0.9)
+  alpha <- ifelse(sex == "female", -0.329, -0.411)
+  sex_factor <- ifelse(sex == "female", 1.018, 1.000)
 
   ratio <- scr / kappa
   egfr <- 141 *
     pmin(ratio, 1)^alpha *
     pmax(ratio, 1)^(-1.209) *
     0.993^age *
-    sexFactor *
-    raceFactor
+    sex_factor *
+    race_factor
   egfr[is.na(sex)] <- NA_real_
   egfr
 }
