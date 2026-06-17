@@ -1,7 +1,7 @@
 Package: egfr
 Type: Package
 Title: Estimated Glomerular Filtration Rate (eGFR) Calculators
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: 
     person("Markus", "Hovd", email = "markus@hovd.io", role = c("aut", "cre", "cph"))
 Description: A comprehensive, vectorised toolkit for estimating glomerular
