@@ -47,7 +47,8 @@ coefficient. Retained for historical comparison; the race-free
 \examples{
 egfr_ckdepi_cr_2009(creatinine = 1.0, age = 50, sex = "female")
 egfr_ckdepi_cr_2009(1.0, 50, "female",
-                    ethnicity = "black", label_afroamerican = "black")
+  ethnicity = "black", label_afroamerican = "black"
+)
 }
 \references{
 Levey AS, Stevens LA, Schmid CH, et al. A new equation to

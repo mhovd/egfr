@@ -43,8 +43,10 @@ Arithmetic mean of the CKiD U25 creatinine (\code{\link[=egfr_ckid_u25_cr]{egfr_
 cystatin C (\code{\link[=egfr_ckid_u25_cys]{egfr_ckid_u25_cys()}}) estimates.
 }
 \examples{
-egfr_ckid_u25_cr_cys(creatinine = 0.6, cystatin = 0.8, age = 10,
-                     sex = "male", height = 140)
+egfr_ckid_u25_cr_cys(
+  creatinine = 0.6, cystatin = 0.8, age = 10,
+  sex = "male", height = 140
+)
 }
 \references{
 Pierce CB, et al. Kidney Int. 2021;99(4):948-956.

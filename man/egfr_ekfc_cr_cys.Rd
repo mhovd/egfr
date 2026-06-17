@@ -11,7 +11,9 @@ egfr_ekfc_cr_cys(
   sex,
   creatinine_units = "mg/dl",
   label_sex_male = "male",
-  label_sex_female = "female"
+  label_sex_female = "female",
+  q_cr = NULL,
+  q_cys = NULL
 )
 }
 \arguments{
@@ -28,6 +30,14 @@ egfr_ekfc_cr_cys(
 
 \item{label_sex_male, label_sex_female}{Values in \code{sex} that denote male and
 female records. Defaults to \code{"male"}/\code{"female"}.}
+
+\item{q_cr}{Optional numeric vector of the reference creatinine Q value
+(median creatinine, in mg/dL) passed to \code{\link[=egfr_ekfc_cr]{egfr_ekfc_cr()}}. \code{NULL} (default)
+uses the built-in EKFC reference Q.}
+
+\item{q_cys}{Optional numeric vector of the reference cystatin C Q value
+(median cystatin C, in mg/L) passed to \code{\link[=egfr_ekfc_cys]{egfr_ekfc_cys()}}. \code{NULL} (default)
+uses the built-in EKFC reference Q.}
 }
 \value{
 Numeric vector of eGFR in mL/min/1.73m^2.

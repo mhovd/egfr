@@ -40,8 +40,10 @@ Research extension of \code{\link[=egfr_ckid_u25_cr]{egfr_ckid_u25_cr()}} with k
 to age 30.
 }
 \examples{
-egfr_ckid_u25_cr_extended(creatinine = 1.0, age = 28, sex = "female",
-                          height = 165)
+egfr_ckid_u25_cr_extended(
+  creatinine = 1.0, age = 28, sex = "female",
+  height = 165
+)
 }
 \references{
 Pierce CB, et al. Kidney Int. 2021;99(4):948-956.

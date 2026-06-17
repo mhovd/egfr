@@ -4,12 +4,17 @@
 \alias{egfr_ekfc_cys}
 \title{EKFC cystatin C eGFR (2023)}
 \usage{
-egfr_ekfc_cys(cystatin, age)
+egfr_ekfc_cys(cystatin, age, q = NULL)
 }
 \arguments{
 \item{cystatin}{Numeric vector of serum cystatin C in mg/L.}
 
 \item{age}{Numeric vector of age in years.}
+
+\item{q}{Optional numeric vector of the reference cystatin C Q value
+(median cystatin C, in mg/L). When \code{NULL} (the default) the built-in
+age-based EKFC reference Q is used; supply a value to use a population- or
+individual-specific Q. Recycled to the length of the other inputs.}
 }
 \value{
 Numeric vector of eGFR in mL/min/1.73m^2.
@@ -20,6 +25,7 @@ cystatin C equation (Pottel et al., 2023).
 }
 \examples{
 egfr_ekfc_cys(cystatin = 0.9, age = 50)
+egfr_ekfc_cys(0.9, 50, q = 0.85)
 }
 \references{
 Pottel H, Bjork J, Rule AD, et al. Cystatin C-based equation to

@@ -74,6 +74,18 @@
   }
 }
 
+#' Validate a user-supplied reference Q value
+#' @noRd
+.egfr_check_q <- function(q) {
+  if (!is.numeric(q)) {
+    stop("'q' must be numeric.", call. = FALSE)
+  }
+  if (any(q <= 0, na.rm = TRUE)) {
+    stop("'q' must be positive.", call. = FALSE)
+  }
+  invisible(q)
+}
+
 #' Recycle a set of vectors to a common length
 #' @noRd
 .egfr_recycle <- function(...) {

@@ -48,6 +48,11 @@
 #' the full age spectrum (2-120 years).
 #'
 #' @inheritParams egfr_ckdepi_cr_2021
+#' @param q Optional numeric vector of the reference creatinine Q value
+#'   (median creatinine for the age/sex, in mg/dL). When `NULL` (the default)
+#'   the built-in EKFC reference Q is used; supply a value to use a
+#'   population-, assay-, or individual-specific Q. Recycled to the length of
+#'   the other inputs.
 #' @return Numeric vector of eGFR in mL/min/1.73m^2.
 #' @references Pottel H, Bjork J, Courbebaisse M, et al. Development and
 #'   validation of a modified full age spectrum creatinine-based equation to
@@ -56,19 +61,31 @@
 #' @examples
 #' egfr_ekfc_cr(creatinine = 1.0, age = 50, sex = "female")
 #' egfr_ekfc_cr(0.5, 8, "male")
+#' egfr_ekfc_cr(1.0, 50, "female", q = 0.72)
 #' @export
 egfr_ekfc_cr <- function(creatinine, age, sex,
                          creatinine_units = "mg/dl",
                          label_sex_male = "male",
-                         label_sex_female = "female") {
+                         label_sex_female = "female",
+                         q = NULL) {
   scr <- .egfr_creatinine_to_mgdl(creatinine, creatinine_units)
   sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
-  parts <- .egfr_recycle(scr, age, sex)
-  scr <- parts[[1]]
-  age <- parts[[2]]
-  sex <- parts[[3]]
 
-  q <- .egfr_ekfc_q_cr(age, sex)
+  if (is.null(q)) {
+    parts <- .egfr_recycle(scr, age, sex)
+    scr <- parts[[1]]
+    age <- parts[[2]]
+    sex <- parts[[3]]
+    q <- .egfr_ekfc_q_cr(age, sex)
+  } else {
+    .egfr_check_q(q)
+    parts <- .egfr_recycle(scr, age, sex, q)
+    scr <- parts[[1]]
+    age <- parts[[2]]
+    sex <- parts[[3]]
+    q <- parts[[4]]
+  }
+
   ratio <- scr / q
   alpha <- ifelse(ratio < 1, -0.322, -1.132)
   egfr <- 107.3 * ratio^alpha
@@ -84,19 +101,32 @@ egfr_ekfc_cr <- function(creatinine, age, sex,
 #'
 #' @param cystatin Numeric vector of serum cystatin C in mg/L.
 #' @param age Numeric vector of age in years.
+#' @param q Optional numeric vector of the reference cystatin C Q value
+#'   (median cystatin C, in mg/L). When `NULL` (the default) the built-in
+#'   age-based EKFC reference Q is used; supply a value to use a population- or
+#'   individual-specific Q. Recycled to the length of the other inputs.
 #' @return Numeric vector of eGFR in mL/min/1.73m^2.
 #' @references Pottel H, Bjork J, Rule AD, et al. Cystatin C-based equation to
 #'   estimate GFR without the inclusion of race and sex. N Engl J Med.
 #'   2023;388(4):333-343. \doi{10.1056/NEJMoa2203769}
 #' @examples
 #' egfr_ekfc_cys(cystatin = 0.9, age = 50)
+#' egfr_ekfc_cys(0.9, 50, q = 0.85)
 #' @export
-egfr_ekfc_cys <- function(cystatin, age) {
-  parts <- .egfr_recycle(cystatin, age)
-  cystatin <- parts[[1]]
-  age <- parts[[2]]
+egfr_ekfc_cys <- function(cystatin, age, q = NULL) {
+  if (is.null(q)) {
+    parts <- .egfr_recycle(cystatin, age)
+    cystatin <- parts[[1]]
+    age <- parts[[2]]
+    q <- ifelse(age <= 50, 0.83, 0.83 + 0.005 * (age - 50))
+  } else {
+    .egfr_check_q(q)
+    parts <- .egfr_recycle(cystatin, age, q)
+    cystatin <- parts[[1]]
+    age <- parts[[2]]
+    q <- parts[[3]]
+  }
 
-  q <- ifelse(age <= 50, 0.83, 0.83 + 0.005 * (age - 50))
   ratio <- cystatin / q
   alpha <- ifelse(ratio < 1, -0.322, -1.132)
   egfr <- 107.3 * ratio^alpha
@@ -110,6 +140,12 @@ egfr_ekfc_cys <- function(cystatin, age) {
 #'
 #' @inheritParams egfr_ekfc_cr
 #' @param cystatin Numeric vector of serum cystatin C in mg/L.
+#' @param q_cr Optional numeric vector of the reference creatinine Q value
+#'   (median creatinine, in mg/dL) passed to [egfr_ekfc_cr()]. `NULL` (default)
+#'   uses the built-in EKFC reference Q.
+#' @param q_cys Optional numeric vector of the reference cystatin C Q value
+#'   (median cystatin C, in mg/L) passed to [egfr_ekfc_cys()]. `NULL` (default)
+#'   uses the built-in EKFC reference Q.
 #' @return Numeric vector of eGFR in mL/min/1.73m^2.
 #' @references Pottel H, Bjork J, Rule AD, et al. N Engl J Med.
 #'   2023;388(4):333-343. \doi{10.1056/NEJMoa2203769}
@@ -119,13 +155,15 @@ egfr_ekfc_cys <- function(cystatin, age) {
 egfr_ekfc_cr_cys <- function(creatinine, cystatin, age, sex,
                              creatinine_units = "mg/dl",
                              label_sex_male = "male",
-                             label_sex_female = "female") {
+                             label_sex_female = "female",
+                             q_cr = NULL, q_cys = NULL) {
   cr <- egfr_ekfc_cr(creatinine, age, sex,
     creatinine_units = creatinine_units,
     label_sex_male = label_sex_male,
-    label_sex_female = label_sex_female
+    label_sex_female = label_sex_female,
+    q = q_cr
   )
-  cys <- egfr_ekfc_cys(cystatin, age)
+  cys <- egfr_ekfc_cys(cystatin, age, q = q_cys)
   (cr + cys) / 2
 }
 

@@ -10,7 +10,8 @@ egfr_ekfc_cr(
   sex,
   creatinine_units = "mg/dl",
   label_sex_male = "male",
-  label_sex_female = "female"
+  label_sex_female = "female",
+  q = NULL
 )
 }
 \arguments{
@@ -25,6 +26,12 @@ egfr_ekfc_cr(
 
 \item{label_sex_male, label_sex_female}{Values in \code{sex} that denote male and
 female records. Defaults to \code{"male"}/\code{"female"}.}
+
+\item{q}{Optional numeric vector of the reference creatinine Q value
+(median creatinine for the age/sex, in mg/dL). When \code{NULL} (the default)
+the built-in EKFC reference Q is used; supply a value to use a
+population-, assay-, or individual-specific Q. Recycled to the length of
+the other inputs.}
 }
 \value{
 Numeric vector of eGFR in mL/min/1.73m^2.
@@ -37,6 +44,7 @@ the full age spectrum (2-120 years).
 \examples{
 egfr_ekfc_cr(creatinine = 1.0, age = 50, sex = "female")
 egfr_ekfc_cr(0.5, 8, "male")
+egfr_ekfc_cr(1.0, 50, "female", q = 0.72)
 }
 \references{
 Pottel H, Bjork J, Courbebaisse M, et al. Development and

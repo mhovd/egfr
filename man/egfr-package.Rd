@@ -21,16 +21,17 @@ Results are returned unrounded (full precision) in mL/min/1.73m^2, except
 Useful links:
 \itemize{
   \item \url{https://github.com/mhovd/egfr}
+  \item \url{https://mhovd.github.io/egfr/}
   \item Report bugs at \url{https://github.com/mhovd/egfr/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Markus Hovd \email{markus@example.com}
+\strong{Maintainer}: Markus Hovd \email{markus@hovd.io} [copyright holder]
 
 Authors:
 \itemize{
-  \item Markus Hovd \email{markus@example.com}
+  \item Markus Hovd \email{markus@hovd.io} [copyright holder]
 }
 
 }

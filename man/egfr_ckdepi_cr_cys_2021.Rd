@@ -38,8 +38,10 @@ CKD-EPI 2021 combined equation (Inker et al., 2021). This is the most
 accurate of the CKD-EPI equations when both biomarkers are available.
 }
 \examples{
-egfr_ckdepi_cr_cys_2021(creatinine = 1.0, cystatin = 0.9,
-                        age = 50, sex = "female")
+egfr_ckdepi_cr_cys_2021(
+  creatinine = 1.0, cystatin = 0.9,
+  age = 50, sex = "female"
+)
 }
 \references{
 Inker LA, Eneanya ND, Coresh J, et al. N Engl J Med.
