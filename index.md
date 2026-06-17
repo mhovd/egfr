@@ -16,6 +16,16 @@ and was ported from the equation set used by
 
 ## Installation
 
+Install the released version from
+[R-universe](https://mhovd.r-universe.dev/egfr):
+
+``` r
+
+install.packages("egfr", repos = "https://mhovd.r-universe.dev")
+```
+
+Or install the development version from GitHub:
+
 ``` r
 
 # install.packages("remotes")
