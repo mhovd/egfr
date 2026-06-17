@@ -2,7 +2,7 @@
 
 ## Authors
 
-- **Markus Hovd**. Author, maintainer.
+- **Markus Hovd**. Author, maintainer, copyright holder.
 
 ## Citation
 
