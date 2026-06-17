@@ -1,4 +1,4 @@
-#' egfrcalc: Estimated Glomerular Filtration Rate Calculators
+#' egfr: Estimated Glomerular Filtration Rate Calculators
 #'
 #' A vectorised toolkit implementing 20 validated equations for estimating
 #' glomerular filtration rate (eGFR) and creatinine clearance from serum

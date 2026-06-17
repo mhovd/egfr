@@ -1,9 +1,9 @@
-# egfrcalc
+# egfr
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-**egfrcalc** is a vectorised R toolkit for estimating glomerular filtration
+**egfr** is a vectorised R toolkit for estimating glomerular filtration
 rate (eGFR) and creatinine clearance from serum creatinine, cystatin C, or
 both. It implements 20 validated adult, paediatric, and neonatal equations,
 plus helpers for body surface area, KDIGO CKD staging, and unit conversion.
@@ -19,13 +19,13 @@ ported from the equation set used by [eGFR.app](https://github.com/mhovd/egfr-ap
 
 ```r
 # install.packages("remotes")
-remotes::install_github("mhovd/egfrcalc")
+remotes::install_github("mhovd/egfr")
 ```
 
 ## Quick start
 
 ```r
-library(egfrcalc)
+library(egfr)
 
 # CKD-EPI 2021 creatinine (race-free) — recommended for adults
 egfr_ckdepi_cr_2021(creatinine = 1.0, age = 50, sex = "female")

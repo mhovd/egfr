@@ -1,4 +1,4 @@
-# egfrcalc 0.1.0
+# egfr 0.1.0
 
 * Initial release.
 * 20 eGFR / creatinine-clearance equations:

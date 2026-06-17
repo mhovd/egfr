@@ -1,4 +1,4 @@
 library(testthat)
-library(egfrcalc)
+library(egfr)
 
-test_check("egfrcalc")
+test_check("egfr")
