@@ -156,3 +156,9 @@ MIT (c) 2026 Markus Hovd.
 - [`gfr_bsa_adjust()`](https://mhovd.github.io/egfr/reference/gfr_bsa_adjust.md)
   : Normalise or de-normalise GFR using body surface area
 
+# Articles
+
+### All vignettes
+
+- [Getting started with
+  egfr](https://mhovd.github.io/egfr/articles/egfr.md):
