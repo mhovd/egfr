@@ -1,6 +1,9 @@
 # egfr
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/mhovd/egfr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mhovd/egfr/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/mhovd/egfr/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/mhovd/egfr/actions/workflows/test-coverage.yaml)
+[![Codecov test coverage](https://codecov.io/gh/mhovd/egfr/graph/badge.svg)](https://app.codecov.io/gh/mhovd/egfr)
 <!-- badges: end -->
 
 **egfr** is a vectorised R toolkit for estimating glomerular filtration
