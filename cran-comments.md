@@ -1,3 +1,11 @@
+## Resubmission
+
+This is a resubmission. In response to CRAN feedback, I have:
+
+* Explained all acronyms (e.g. CKD-EPI, MDRD, EKFC, FAS, BIS, CKiD U25, CAPA,
+  KDIGO) on first use in the Description field of DESCRIPTION.
+* Updated Description with references to the equations.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
