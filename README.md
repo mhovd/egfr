@@ -4,6 +4,7 @@
 [![R-CMD-check](https://github.com/mhovd/egfr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mhovd/egfr/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/mhovd/egfr/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/mhovd/egfr/actions/workflows/test-coverage.yaml)
 [![Codecov test coverage](https://codecov.io/gh/mhovd/egfr/graph/badge.svg)](https://app.codecov.io/gh/mhovd/egfr)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21670286.svg)](https://doi.org/10.5281/zenodo.21670286)
 <!-- badges: end -->
 
 

@@ -17,5 +17,6 @@ bibentry(
   author   = person("Markus", "Hovd"),
   year     = year,
   note     = note,
-  url      = "https://github.com/mhovd/egfr"
+  url      = "https://github.com/mhovd/egfr",
+  doi      = "10.5281/zenodo.21670286"
 )
