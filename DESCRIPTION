@@ -1,9 +1,10 @@
 Package: egfr
 Type: Package
 Title: Estimated Glomerular Filtration Rate (eGFR) Calculators
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: 
-    person("Markus", "Hovd", email = "markus@hovd.io", role = c("aut", "cre", "cph"))
+    person("Markus", "Hovd", email = "markus@hovd.io", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0002-6077-0934"))
 Description: A comprehensive, vectorised toolkit for estimating glomerular
     filtration rate (eGFR) and creatinine clearance from serum creatinine,
     cystatin C, or both. Implements adult, paediatric, and
