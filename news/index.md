@@ -1,5 +1,12 @@
 # Changelog
 
+## egfr 1.1.2
+
+- The `CITATION` file now reports the installed package version
+  dynamically instead of a hardcoded value.
+- Added the maintainer’s ORCID and Zenodo archive metadata
+  (`.zenodo.json`) so the package can be cited via a DOI.
+
 ## egfr 1.1.0
 
 - Fixed the Full Age Spectrum (FAS) creatinine equation
