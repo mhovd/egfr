@@ -1,0 +1,41 @@
+{
+  "title": "egfr: Estimated Glomerular Filtration Rate (eGFR) Calculators",
+  "description": "A vectorised R toolkit implementing validated equations for estimating glomerular filtration rate (eGFR) and creatinine clearance from serum creatinine, cystatin C, or both, covering adult, paediatric, and neonatal equations, plus helpers for body surface area, KDIGO CKD staging, and unit conversion.",
+  "upload_type": "software",
+  "license": "MIT",
+  "access_right": "open",
+  "creators": [
+    {
+      "name": "Hovd, Markus",
+      "orcid": "0000-0002-6077-0934"
+    }
+  ],
+  "keywords": [
+    "eGFR",
+    "glomerular filtration rate",
+    "creatinine clearance",
+    "nephrology",
+    "chronic kidney disease",
+    "CKD-EPI",
+    "cystatin C",
+    "R",
+    "CRAN"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/mhovd/egfr",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://mhovd.github.io/egfr/",
+      "relation": "isDocumentedBy",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://CRAN.R-project.org/package=egfr",
+      "relation": "isIdenticalTo",
+      "scheme": "url"
+    }
+  ]
+}

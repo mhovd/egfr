@@ -1,9 +1,21 @@
+if (!exists("meta") || is.null(meta)) {
+  meta <- packageDescription("egfr")
+}
+
+year <- sub("-.*", "", meta$Date)
+if (length(year) == 0L || is.na(year) || !nzchar(year)) {
+  year <- "2026"
+}
+
+note <- sprintf("R package version %s", meta$Version)
+
+citHeader("To cite the egfr package in publications use:")
+
 bibentry(
   bibtype  = "Manual",
   title    = "{egfr}: Estimated Glomerular Filtration Rate (eGFR) Calculators",
   author   = person("Markus", "Hovd"),
-  year     = "2026",
-  note     = "R package version 0.1.0",
-  url      = "https://github.com/mhovd/egfr",
-  header   = "To cite the egfr package in publications use:"
+  year     = year,
+  note     = note,
+  url      = "https://github.com/mhovd/egfr"
 )
