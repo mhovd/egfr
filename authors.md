@@ -8,10 +8,12 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/mhovd/egfr/blob/v1.1.2/inst/CITATION)
+[`inst/CITATION`](https://github.com/mhovd/egfr/blob/main/inst/CITATION)
 
 Hovd M (2026). *egfr: Estimated Glomerular Filtration Rate (eGFR)
-Calculators*. R package version 1.1.2, <https://github.com/mhovd/egfr>.
+Calculators*.
+[doi:10.5281/zenodo.21670286](https://doi.org/10.5281/zenodo.21670286).
+R package version 1.1.2, <https://github.com/mhovd/egfr>.
 
     @Manual{,
       title = {{egfr}: Estimated Glomerular Filtration Rate (eGFR) Calculators},
@@ -19,4 +21,5 @@ Calculators*. R package version 1.1.2, <https://github.com/mhovd/egfr>.
       year = {2026},
       note = {R package version 1.1.2},
       url = {https://github.com/mhovd/egfr},
+      doi = {10.5281/zenodo.21670286},
     }
