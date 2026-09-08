@@ -10,7 +10,9 @@ implemented an experimental equation.
 
 - [`egfr_ekfc_cr()`](https://mhovd.github.io/egfr/reference/egfr_ekfc_cr.md)
   now uses the correct reference Q specification published in Pottel et
-  al. (2021).
+  al. (2021): the age polynomial applies to ages 2-25 inclusive, with
+  the adult Q only above age 25. Verified against the source paper and
+  cross-validated against the eGFR.app implementation.
 - [`egfr_fas_cr()`](https://mhovd.github.io/egfr/reference/egfr_fas_cr.md)
   now applies the published age- and sex-specific Q values from Table 1
   of Pottel et al. (2016). Previous versions used the adult Q (0.90 /
