@@ -1,6 +1,6 @@
 #' egfr: Estimated Glomerular Filtration Rate Calculators
 #'
-#' A vectorised toolkit implementing 20 validated equations for estimating
+#' A vectorised toolkit implementing 19 validated equations for estimating
 #' glomerular filtration rate (eGFR) and creatinine clearance from serum
 #' creatinine, cystatin C, or both, plus helpers for body surface area,
 #' KDIGO CKD staging, and unit conversion.
@@ -43,7 +43,7 @@
 #' @noRd
 .egfr_creatinine_to_mgdl <- function(creatinine, units = "mg/dl") {
   units <- tolower(trimws(units))
-  if (units %in% c("mg/dl", "mgdl", "mg/dL")) {
+  if (units %in% c("mg/dl", "mgdl")) {
     creatinine
   } else if (units %in% c(
     "umol/l", "\u00b5mol/l", "micromol/l", "mcmol/l",

@@ -55,6 +55,15 @@ egfr_ckdepi_cr_2021 <- function(creatinine, age, sex,
 #' @inheritParams egfr_ckdepi_cr_2021
 #'
 #' @return Numeric vector of eGFR in mL/min/1.73m^2.
+#' @section Age coefficient:
+#' This function uses an age factor of `0.9962^age`, as reported in Table 2 of
+#' Inker et al. (2021), which gives the fitted coefficient to four decimal
+#' places (95% CI 0.9957 to 0.9966). The original 2012 publication and the
+#' National Kidney Foundation calculator print the same coefficient rounded to
+#' `0.996`. The four-decimal form is used here for consistency with the
+#' `0.9938` and `0.9961` factors of the other CKD-EPI 2021 equations. Results
+#' are therefore about 1.2% higher at age 60 and 1.6% higher at age 80 than a
+#' calculator using `0.996`.
 #' @references Inker LA, Eneanya ND, Coresh J, et al. N Engl J Med.
 #'   2021;385(19):1737-1749. \doi{10.1056/NEJMoa2102953}
 #' @examples

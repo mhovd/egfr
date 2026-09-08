@@ -1,7 +1,7 @@
 Package: egfr
 Type: Package
 Title: Estimated Glomerular Filtration Rate (eGFR) Calculators
-Version: 1.1.2
+Version: 2.0.0
 Authors@R: 
     person("Markus", "Hovd", email = "markus@hovd.io", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-6077-0934"))
@@ -35,5 +35,5 @@ Suggests:
 Config/testthat/edition: 3
 URL: https://github.com/mhovd/egfr, https://mhovd.github.io/egfr/
 BugReports: https://github.com/mhovd/egfr/issues
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0
 VignetteBuilder: knitr

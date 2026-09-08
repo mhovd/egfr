@@ -67,7 +67,7 @@ gfr_bsa_adjust <- function(gfr, bsa, to = c("normalized", "absolute")) {
 #' @export
 ckd_stage <- function(egfr) {
   as.character(cut(
-    egfr,
+    as.numeric(egfr),
     breaks = c(-Inf, 15, 30, 45, 60, 90, Inf),
     labels = c("G5", "G4", "G3b", "G3a", "G2", "G1"),
     right = FALSE

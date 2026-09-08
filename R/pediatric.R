@@ -10,6 +10,9 @@
 #' @param height_units Units of `height`: `"cm"` (default) or `"m"`.
 #'
 #' @return Numeric vector of eGFR in mL/min/1.73m^2.
+#' @section Validity:
+#' Derived in 349 children with CKD aged 1-16 years. Requires
+#' IDMS-standardised creatinine.
 #' @references Schwartz GJ, Munoz A, Schneider MF, et al. New equations to
 #'   estimate GFR in children with CKD. J Am Soc Nephrol. 2009;20(3):629-637.
 #'   \doi{10.1681/ASN.2008030287}
@@ -30,22 +33,14 @@ egfr_schwartz <- function(creatinine, height,
 
 #' CKiD U25 age- and sex-dependent kappa for creatinine equations
 #' @noRd
-.egfr_ckid_kappa_cr <- function(age, sex, extended = FALSE) {
+.egfr_ckid_kappa_cr <- function(age, sex) {
   female <- ifelse(
     age < 12, 36.1 * 1.008^(age - 12),
-    ifelse(age < 18, 36.1 * 1.023^(age - 12),
-      ifelse(age <= 25, 41.4,
-        if (extended) 41.4 * 0.995^(age - 25) else 41.4
-      )
-    )
+    ifelse(age < 18, 36.1 * 1.023^(age - 12), 41.4)
   )
   male <- ifelse(
     age < 12, 39.0 * 1.008^(age - 12),
-    ifelse(age < 18, 39.0 * 1.045^(age - 12),
-      ifelse(age <= 25, 50.8,
-        if (extended) 50.8 * 0.995^(age - 25) else 50.8
-      )
-    )
+    ifelse(age < 18, 39.0 * 1.045^(age - 12), 50.8)
   )
   ifelse(sex == "female", female, male)
 }
@@ -61,6 +56,9 @@ egfr_schwartz <- function(creatinine, height,
 #' @param height_units Units of `height`: `"cm"` (default) or `"m"`.
 #'
 #' @return Numeric vector of eGFR in mL/min/1.73m^2.
+#' @section Validity:
+#' Developed for ages 1-25 years; the reference calculator published with the
+#' equation is restricted to that range. Values outside it are extrapolations.
 #' @references Pierce CB, Munoz A, Ng DK, Warady BA, Furth SL, Schwartz GJ.
 #'   Age- and sex-dependent clinical equations to estimate GFR in children and
 #'   young adults with CKD. Kidney Int. 2021;99(4):948-956.
@@ -82,42 +80,7 @@ egfr_ckid_u25_cr <- function(creatinine, age, sex, height,
   sex <- parts[[3]]
   height_cm <- parts[[4]]
 
-  kappa <- .egfr_ckid_kappa_cr(age, sex, extended = FALSE)
-  egfr <- kappa * ((height_cm / 100) / scr)
-  egfr[is.na(sex)] <- NA_real_
-  egfr
-}
-
-#' CKiD U25 extended creatinine eGFR (to age 30)
-#'
-#' Research extension of [egfr_ckid_u25_cr()] with kappa values that continue
-#' to age 30.
-#'
-#' @inheritParams egfr_ckid_u25_cr
-#' @return Numeric vector of eGFR in mL/min/1.73m^2.
-#' @references Pierce CB, et al. Kidney Int. 2021;99(4):948-956.
-#'   \doi{10.1016/j.kint.2020.10.047}
-#' @examples
-#' egfr_ckid_u25_cr_extended(
-#'   creatinine = 1.0, age = 28, sex = "female",
-#'   height = 165
-#' )
-#' @export
-egfr_ckid_u25_cr_extended <- function(creatinine, age, sex, height,
-                                      creatinine_units = "mg/dl",
-                                      height_units = "cm",
-                                      label_sex_male = "male",
-                                      label_sex_female = "female") {
-  scr <- .egfr_creatinine_to_mgdl(creatinine, creatinine_units)
-  height_cm <- .egfr_height_to_cm(height, height_units)
-  sex <- .egfr_normalize_sex(sex, label_sex_male, label_sex_female)
-  parts <- .egfr_recycle(scr, age, sex, height_cm)
-  scr <- parts[[1]]
-  age <- parts[[2]]
-  sex <- parts[[3]]
-  height_cm <- parts[[4]]
-
-  kappa <- .egfr_ckid_kappa_cr(age, sex, extended = TRUE)
+  kappa <- .egfr_ckid_kappa_cr(age, sex)
   egfr <- kappa * ((height_cm / 100) / scr)
   egfr[is.na(sex)] <- NA_real_
   egfr
@@ -207,6 +170,10 @@ egfr_ckid_u25_cr_cys <- function(creatinine, cystatin, age, sex, height,
 #' @param cystatin Numeric vector of serum cystatin C in mg/L.
 #' @param age Numeric vector of age in years.
 #' @return Numeric vector of eGFR in mL/min/1.73m^2.
+#' @section Validity:
+#' Derived in 4690 subjects spanning children and Caucasian and Asian adults,
+#' and intended for use across all ages. Note that CAPA is known to return
+#' implausibly high estimates in children under 10 years.
 #' @references Grubb A, Horio M, Hansson LO, et al. Generation of a new
 #'   cystatin C-based estimating equation for GFR by use of 7 assays
 #'   standardized to the international calibrator. Clin Chem.
@@ -223,14 +190,20 @@ egfr_capa <- function(cystatin, age) {
 
 #' Neonatal creatinine eGFR (2022)
 #'
-#' Estimates GFR in term-born neonates using the equation of Smeets et al.
-#' (2022). Requires IDMS-standardised creatinine.
+#' Estimates GFR in term-born neonates using the updated Schwartz-type
+#' coefficient of Smeets et al. (2022). Requires IDMS-standardised creatinine.
 #'
 #' @inheritParams egfr_schwartz
 #' @return Numeric vector of eGFR in mL/min/1.73m^2.
-#' @references Smeets NJL, IntHout J, van der Burgh MJP, et al. SCr- and
-#'   cystatin C-based equations to estimate GFR in term-born neonates.
-#'   J Am Soc Nephrol. 2022;33(7):1277-1292. \doi{10.1681/ASN.2021111453}
+#' @section Validity:
+#' Derived for **term-born** neonates (gestational age >= 37 weeks) over
+#' postnatal days 0-28. The authors explicitly note it is not intended for
+#' preterm neonates, and that validation in a large neonatal cohort is still
+#' required.
+#' @references Smeets NJL, IntHout J, van der Burgh MJP, Schwartz GJ,
+#'   Schreuder MF, de Wildt SN. Maturation of GFR in term-born neonates: an
+#'   individual participant data meta-analysis. J Am Soc Nephrol.
+#'   2022;33(7):1277-1292. \doi{10.1681/ASN.2021101326}
 #' @examples
 #' egfr_neonatal(creatinine = 0.5, height = 50)
 #' @export

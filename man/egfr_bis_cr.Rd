@@ -33,6 +33,13 @@ Numeric vector of eGFR in mL/min/1.73m^2.
 Estimates GFR from serum creatinine using the BIS1 equation (Schaeffner et
 al., 2012), developed in an elderly (>= 70 years) German cohort.
 }
+\section{Validity}{
+
+Derived in 610 community-dwelling Germans aged 70 years or older (mean age
+78.5). It should not be applied below age 70, and the authors note that no
+external validation dataset was used.
+}
+
 \examples{
 egfr_bis_cr(creatinine = 1.1, age = 75, sex = "female")
 }
