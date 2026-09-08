@@ -38,9 +38,36 @@ Numeric vector of eGFR in mL/min/1.73m^2.
 }
 \description{
 Estimates GFR from serum creatinine using the European Kidney Function
-Consortium (EKFC) creatinine equation (Pottel et al., 2021). Valid across
-the full age spectrum (2-120 years).
+Consortium (EKFC) creatinine equation (Pottel et al., 2021).
 }
+\section{Reference Q}{
+
+The default Q follows the published EKFC specification. For ages 2-25 years
+Q is a sex-specific polynomial in age (given by the authors on the
+micromol/L scale and converted here to mg/dL):
+
+\deqn{\ln(Q_{male}) = 3.200 + 0.259 a - 0.543 \ln(a) - 0.00763 a^2 +
+  0.0000790 a^3}
+\deqn{\ln(Q_{female}) = 3.080 + 0.177 a - 0.223 \ln(a) - 0.00596 a^2 +
+  0.0000686 a^3}
+
+From age 25 onwards Q is constant at the adult values of 0.90 mg/dL
+(80 micromol/L) for males and 0.70 mg/dL (62 micromol/L) for females. The
+polynomial and the adult plateau differ by roughly 1\% at the age-25 knot;
+this step is part of the published specification and is preserved
+deliberately.
+
+Population-specific adult Q values (e.g. 1.02 / 0.74 mg/dL for Black
+Europeans) may be supplied via \code{q}.
+}
+
+\section{Validity}{
+
+Developed and validated across ages 2-90 years and serum creatinine
+40-490 micromol/L (0.45-5.54 mg/dL). Values outside this range are
+extrapolations.
+}
+
 \examples{
 egfr_ekfc_cr(creatinine = 1.0, age = 50, sex = "female")
 egfr_ekfc_cr(0.5, 8, "male")

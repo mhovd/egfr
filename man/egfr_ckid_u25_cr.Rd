@@ -40,6 +40,12 @@ Estimates GFR in children and young adults (ages 1-25) using the CKiD U25
 creatinine equation (Pierce et al., 2021). This is the first-choice
 paediatric equation.
 }
+\section{Validity}{
+
+Developed for ages 1-25 years; the reference calculator published with the
+equation is restricted to that range. Values outside it are extrapolations.
+}
+
 \examples{
 egfr_ckid_u25_cr(creatinine = 0.6, age = 10, sex = "male", height = 140)
 }

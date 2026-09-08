@@ -23,6 +23,19 @@ Numeric vector of eGFR in mL/min/1.73m^2.
 Estimates GFR from serum cystatin C using the sex- and race-free EKFC
 cystatin C equation (Pottel et al., 2023).
 }
+\section{Reference Q}{
+
+The default Q is the sex- and race-free value published with the equation:
+0.83 mg/L below age 50, and 0.83 + 0.005 * (age - 50) from age 50 onwards.
+The same value of 0.83 mg/L is endorsed for children (Pottel et al.,
+Pediatr Nephrol. 2024), so no separate paediatric Q is applied.
+}
+
+\section{Validity}{
+
+Applicable from age 2 years upwards.
+}
+
 \examples{
 egfr_ekfc_cys(cystatin = 0.9, age = 50)
 egfr_ekfc_cys(0.9, 50, q = 0.85)

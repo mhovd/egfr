@@ -34,6 +34,12 @@ Estimates GFR from serum creatinine using the revised Lund-Malmoe equation
 (Bjork et al., 2011). Piecewise-linear in plasma creatinine (umol/L) with
 sex-specific knots.
 }
+\section{Validity}{
+
+Derived in 850 Swedish adults aged 18-95 years. Not validated in children;
+a separate paediatric adaptation (LMR18) was published in 2020.
+}
+
 \examples{
 egfr_lund_malmo(creatinine = 1.0, age = 50, sex = "female")
 }
