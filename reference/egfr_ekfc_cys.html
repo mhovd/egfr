@@ -9,7 +9,7 @@ cystatin C equation (Pottel et al., 2023)."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">egfr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,6 +68,21 @@ individual-specific Q. Recycled to the length of the other inputs.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Numeric vector of eGFR in mL/min/1.73m^2.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="reference-q">Reference Q<a class="anchor" aria-label="anchor" href="#reference-q"></a></h2>
+
+
+<p>The default Q is the sex- and race-free value published with the equation:
+0.83 mg/L below age 50, and 0.83 + 0.005 * (age - 50) from age 50 onwards.
+The same value of 0.83 mg/L is endorsed for children (Pottel et al.,
+Pediatr Nephrol. 2024), so no separate paediatric Q is applied.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="validity">Validity<a class="anchor" aria-label="anchor" href="#validity"></a></h2>
+
+
+<p>Applicable from age 2 years upwards.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

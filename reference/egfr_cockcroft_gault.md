@@ -49,6 +49,19 @@ egfr_cockcroft_gault(
 
 Numeric vector of creatinine clearance in mL/min.
 
+## Interpretation
+
+This equation returns creatinine clearance in mL/min, which is **not**
+normalised to 1.73 m^2 and is not directly comparable with the other
+`egfr_*()` functions. Creatinine clearance overestimates true GFR
+because creatinine is secreted by the renal tubules. The equation was
+derived in 249 hospitalised adults aged 18-92, all male, using
+non-standardised (Jaffe) creatinine; it is therefore not IDMS-traceable
+and differs systematically from modern eGFR equations. The 15% downward
+adjustment for women (the 0.85 factor) is stated in the original 1976
+publication, though it was asserted rather than derived, as the
+derivation cohort was male.
+
 ## References
 
 Cockcroft DW, Gault MH. Prediction of creatinine clearance from serum

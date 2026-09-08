@@ -23,6 +23,12 @@ egfr_capa(cystatin, age)
 
 Numeric vector of eGFR in mL/min/1.73m^2.
 
+## Validity
+
+Derived in 4690 subjects spanning children and Caucasian and Asian
+adults, and intended for use across all ages. Note that CAPA is known to
+return implausibly high estimates in children under 10 years.
+
 ## References
 
 Grubb A, Horio M, Hansson LO, et al. Generation of a new cystatin

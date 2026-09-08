@@ -43,6 +43,12 @@ egfr_bis_cr(
 
 Numeric vector of eGFR in mL/min/1.73m^2.
 
+## Validity
+
+Derived in 610 community-dwelling Germans aged 70 years or older (mean
+age 78.5). It should not be applied below age 70, and the authors note
+that no external validation dataset was used.
+
 ## References
 
 Schaeffner ES, Ebert N, Delanaye P, et al. Two novel equations to

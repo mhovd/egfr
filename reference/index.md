@@ -26,8 +26,6 @@
   : CKiD U25 creatinine eGFR
 - [`egfr_ckid_u25_cr_cys()`](https://mhovd.github.io/egfr/reference/egfr_ckid_u25_cr_cys.md)
   : CKiD U25 combined creatinine + cystatin C eGFR
-- [`egfr_ckid_u25_cr_extended()`](https://mhovd.github.io/egfr/reference/egfr_ckid_u25_cr_extended.md)
-  : CKiD U25 extended creatinine eGFR (to age 30)
 - [`egfr_ckid_u25_cys()`](https://mhovd.github.io/egfr/reference/egfr_ckid_u25_cys.md)
   : CKiD U25 cystatin C eGFR
 - [`egfr_cockcroft_gault()`](https://mhovd.github.io/egfr/reference/egfr_cockcroft_gault.md)

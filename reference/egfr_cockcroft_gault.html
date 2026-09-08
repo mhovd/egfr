@@ -11,7 +11,7 @@ drug dosing."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">egfr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,6 +90,20 @@ female records. Defaults to <code>"male"</code>/<code>"female"</code>.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Numeric vector of creatinine clearance in mL/min.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="interpretation">Interpretation<a class="anchor" aria-label="anchor" href="#interpretation"></a></h2>
+
+
+<p>This equation returns creatinine clearance in mL/min, which is <strong>not</strong>
+normalised to 1.73 m^2 and is not directly comparable with the other
+<code>egfr_*()</code> functions. Creatinine clearance overestimates true GFR because
+creatinine is secreted by the renal tubules. The equation was derived in
+249 hospitalised adults aged 18-92, all male, using non-standardised
+(Jaffe) creatinine; it is therefore not IDMS-traceable and differs
+systematically from modern eGFR equations. The 15% downward adjustment for
+women (the 0.85 factor) is stated in the original 1976 publication, though
+it was asserted rather than derived, as the derivation cohort was male.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

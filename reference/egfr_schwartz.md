@@ -36,6 +36,11 @@ egfr_schwartz(
 
 Numeric vector of eGFR in mL/min/1.73m^2.
 
+## Validity
+
+Derived in 349 children with CKD aged 1-16 years. Requires
+IDMS-standardised creatinine.
+
 ## References
 
 Schwartz GJ, Munoz A, Schneider MF, et al. New equations to estimate GFR

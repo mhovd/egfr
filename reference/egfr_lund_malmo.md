@@ -44,6 +44,12 @@ egfr_lund_malmo(
 
 Numeric vector of eGFR in mL/min/1.73m^2.
 
+## Validity
+
+Derived in 850 Swedish adults aged 18-95 years. Not validated in
+children; a separate paediatric adaptation (LMR18) was published in
+2020.
+
 ## References
 
 Bjork J, Grubb A, Sterner G, Nyman U. Revised equations for estimating

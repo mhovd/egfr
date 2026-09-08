@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">egfr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,6 +33,37 @@
       <small>Source: <a href="https://github.com/mhovd/egfr/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.0" id="egfr-200">egfr 2.0.0<a class="anchor" aria-label="anchor" href="#egfr-200"></a></h2>
+<p>This release corrects two equations that returned clinically wrong values for paediatric patients, and removes one function that implemented an experimental equation.</p>
+<div class="section level3">
+<h3 id="breaking-changes-2-0-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2-0-0"></a></h3>
+<ul><li>
+<code><a href="../reference/egfr_ekfc_cr.html">egfr_ekfc_cr()</a></code> now uses the correct reference Q specification published in Pottel et al. (2021).</li>
+<li>
+<code><a href="../reference/egfr_fas_cr.html">egfr_fas_cr()</a></code> now applies the published age- and sex-specific Q values from Table 1 of Pottel et al. (2016). Previous versions used the adult Q (0.90 / 0.70 mg/dL) at every age, which overestimated eGFR by up to ~246% in infants and ~76% in a 10-year-old. Q is shared between boys and girls for ages 1-14, becomes sex-specific for ages 15-19, and reaches the adult values from age 20. Adult results (age &gt;= 20) are unchanged.</li>
+<li>
+<code>egfr_ckid_u25_cr_extended()</code> has been <strong>removed</strong>. Its kappa extension to age 30 (<code>0.995^(age - 25)</code>) was an experimental feature. Use <code><a href="../reference/egfr_ckid_u25_cr.html">egfr_ckid_u25_cr()</a></code> within its validated range.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-2-0-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-0"></a></h3>
+<ul><li>
+<code><a href="../reference/ckd_stage.html">ckd_stage()</a></code> no longer errors on a logical <code>NA</code> (e.g. <code>ckd_stage(NA)</code>) and returns <code>NA</code> as expected.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-0-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-0"></a></h3>
+<ul><li>Corrected the citation for <code><a href="../reference/egfr_neonatal.html">egfr_neonatal()</a></code>.</li>
+<li>
+<code><a href="../reference/egfr_ckdepi_cys_2021.html">egfr_ckdepi_cys_2021()</a></code> now documents its use of the four-decimal age factor <code>0.9962</code> from Table 2 of Inker et al. (2021), and the resulting ~1.2-1.6% difference at ages 60-80 relative to calculators that use the rounded <code>0.996</code> printed in the 2012 paper and by the National Kidney Foundation.</li>
+<li>Added published validity ranges to the documentation of <code><a href="../reference/egfr_ekfc_cr.html">egfr_ekfc_cr()</a></code> (ages 2-90; the previous claim of 2-120 was incorrect), <code><a href="../reference/egfr_ekfc_cys.html">egfr_ekfc_cys()</a></code>, <code><a href="../reference/egfr_fas_cr.html">egfr_fas_cr()</a></code>, <code><a href="../reference/egfr_bis_cr.html">egfr_bis_cr()</a></code> (age &gt;= 70), <code><a href="../reference/egfr_lund_malmo.html">egfr_lund_malmo()</a></code> (adults), <code><a href="../reference/egfr_schwartz.html">egfr_schwartz()</a></code> (ages 1-16), <code><a href="../reference/egfr_ckid_u25_cr.html">egfr_ckid_u25_cr()</a></code> (ages 1-25), <code><a href="../reference/egfr_capa.html">egfr_capa()</a></code>, and <code><a href="../reference/egfr_neonatal.html">egfr_neonatal()</a></code> (term-born, postnatal days 0-28).</li>
+<li>
+<code><a href="../reference/egfr_cockcroft_gault.html">egfr_cockcroft_gault()</a></code> now documents that it returns creatinine clearance (which overestimates GFR through tubular secretion) and was derived using non-standardised Jaffe creatinine.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-2-0-0">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-0"></a></h3>
+<ul><li>Added <code>test-reference-values.R</code>, which validates every equation against coefficients written out directly from the original publications, including the EKFC and FAS reference Q tables and continuity checks at age knots. The previous suite largely re-derived values using the package’s own internals and could not detect a mis-transcribed equation.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.2" id="egfr-112">egfr 1.1.2<a class="anchor" aria-label="anchor" href="#egfr-112"></a></h2>
 <ul><li>The <code>CITATION</code> file now reports the installed package version dynamically instead of a hardcoded value.</li>

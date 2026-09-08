@@ -1,6 +1,6 @@
 # egfr: Estimated Glomerular Filtration Rate Calculators
 
-A vectorised toolkit implementing 20 validated equations for estimating
+A vectorised toolkit implementing 19 validated equations for estimating
 glomerular filtration rate (eGFR) and creatinine clearance from serum
 creatinine, cystatin C, or both, plus helpers for body surface area,
 KDIGO CKD staging, and unit conversion.
@@ -26,8 +26,10 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Markus Hovd <markus@hovd.io> \[copyright holder\]
+**Maintainer**: Markus Hovd <markus@hovd.io>
+([ORCID](https://orcid.org/0000-0002-6077-0934)) \[copyright holder\]
 
 Authors:
 
-- Markus Hovd <markus@hovd.io> \[copyright holder\]
+- Markus Hovd <markus@hovd.io>
+  ([ORCID](https://orcid.org/0000-0002-6077-0934)) \[copyright holder\]

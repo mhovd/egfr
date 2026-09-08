@@ -54,6 +54,12 @@ egfr_ckid_u25_cr(
 
 Numeric vector of eGFR in mL/min/1.73m^2.
 
+## Validity
+
+Developed for ages 1-25 years; the reference calculator published with
+the equation is restricted to that range. Values outside it are
+extrapolations.
+
 ## References
 
 Pierce CB, Munoz A, Ng DK, Warady BA, Furth SL, Schwartz GJ. Age- and
