@@ -147,14 +147,18 @@ test_that("EKFC creatinine Q reproduces the published polynomial", {
   }
 })
 
-test_that("EKFC Q reaches the adult plateau at age 25, not 18", {
+test_that("EKFC Q reaches the adult plateau above age 25, not at 18", {
   # The plateau must NOT start at 18.
   expect_false(isTRUE(all.equal(.egfr_ekfc_q_cr(18, "male"), 0.90)))
   expect_false(isTRUE(all.equal(.egfr_ekfc_q_cr(18, "female"), 0.70)))
-  # From 25 onwards Q is constant at the adult values.
-  expect_equal(.egfr_ekfc_q_cr(25, "male"), 0.90, tolerance = 1e-9)
+  # The published range for the polynomial is "ages 2-25 y" inclusive, so age
+  # 25 itself still uses the polynomial (80.9 / 62.4 umol/L).
+  expect_equal(.egfr_ekfc_q_cr(25, "male") * 88.4, 80.9, tolerance = 0.05)
+  expect_equal(.egfr_ekfc_q_cr(25, "female") * 88.4, 62.4, tolerance = 0.05)
+  # Above 25 Q is constant at the adult values.
+  expect_equal(.egfr_ekfc_q_cr(25.5, "male"), 0.90, tolerance = 1e-9)
   expect_equal(.egfr_ekfc_q_cr(60, "male"), 0.90, tolerance = 1e-9)
-  expect_equal(.egfr_ekfc_q_cr(25, "female"), 0.70, tolerance = 1e-9)
+  expect_equal(.egfr_ekfc_q_cr(25.5, "female"), 0.70, tolerance = 1e-9)
   expect_equal(.egfr_ekfc_q_cr(60, "female"), 0.70, tolerance = 1e-9)
 })
 

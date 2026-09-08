@@ -6,7 +6,9 @@ paediatric patients, and removes one function that implemented an experimental e
 ## Breaking changes
 
 - `egfr_ekfc_cr()` now uses the correct reference Q specification published in
-  Pottel et al. (2021).
+  Pottel et al. (2021): the age polynomial applies to ages 2-25 inclusive, with
+  the adult Q only above age 25. Verified against the source paper and
+  cross-validated against the eGFR.app implementation.
 - `egfr_fas_cr()` now applies the published age- and sex-specific Q values from
   Table 1 of Pottel et al. (2016). Previous versions used the adult Q (0.90 /
   0.70 mg/dL) at every age, which overestimated eGFR by up to ~246% in infants
