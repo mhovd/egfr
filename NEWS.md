@@ -1,9 +1,7 @@
 # egfr 2.0.0
 
 This release corrects two equations that returned clinically wrong values for
-paediatric patients, and removes one function that implemented an equation
-which was never published. **Results change for children and young adults**;
-adult results are unaffected except where noted.
+paediatric patients, and removes one function that implemented an experimental equation.
 
 ## Breaking changes
 
