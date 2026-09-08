@@ -28,6 +28,12 @@ Numeric vector of eGFR in mL/min/1.73m^2.
 Estimates GFR in children using the bedside Schwartz equation (Schwartz et
 al., 2009). Requires IDMS-standardised creatinine.
 }
+\section{Validity}{
+
+Derived in 349 children with CKD aged 1-16 years. Requires
+IDMS-standardised creatinine.
+}
+
 \examples{
 egfr_schwartz(creatinine = 0.5, height = 120)
 }

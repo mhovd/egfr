@@ -6,7 +6,7 @@
 \alias{egfr-package}
 \title{egfr: Estimated Glomerular Filtration Rate Calculators}
 \description{
-A vectorised toolkit implementing 20 validated equations for estimating
+A vectorised toolkit implementing 19 validated equations for estimating
 glomerular filtration rate (eGFR) and creatinine clearance from serum
 creatinine, cystatin C, or both, plus helpers for body surface area,
 KDIGO CKD staging, and unit conversion.
@@ -27,11 +27,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Markus Hovd \email{markus@hovd.io} [copyright holder]
+\strong{Maintainer}: Markus Hovd \email{markus@hovd.io} (\href{https://orcid.org/0000-0002-6077-0934}{ORCID}) [copyright holder]
 
 Authors:
 \itemize{
-  \item Markus Hovd \email{markus@hovd.io} [copyright holder]
+  \item Markus Hovd \email{markus@hovd.io} (\href{https://orcid.org/0000-0002-6077-0934}{ORCID}) [copyright holder]
 }
 
 }

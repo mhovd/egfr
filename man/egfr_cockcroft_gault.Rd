@@ -37,6 +37,19 @@ Estimates creatinine clearance (not BSA-normalised eGFR) using the
 Cockcroft-Gault equation (Cockcroft & Gault, 1976). Commonly used for
 drug dosing.
 }
+\section{Interpretation}{
+
+This equation returns creatinine clearance in mL/min, which is \strong{not}
+normalised to 1.73 m^2 and is not directly comparable with the other
+\verb{egfr_*()} functions. Creatinine clearance overestimates true GFR because
+creatinine is secreted by the renal tubules. The equation was derived in
+249 hospitalised adults aged 18-92, all male, using non-standardised
+(Jaffe) creatinine; it is therefore not IDMS-traceable and differs
+systematically from modern eGFR equations. The 15\% downward adjustment for
+women (the 0.85 factor) is stated in the original 1976 publication, though
+it was asserted rather than derived, as the derivation cohort was male.
+}
+
 \examples{
 egfr_cockcroft_gault(creatinine = 1.0, age = 50, sex = "male", weight = 80)
 }

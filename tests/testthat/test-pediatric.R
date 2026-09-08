@@ -28,13 +28,6 @@ test_that("CKiD U25 adult-plateau kappa is used for ages 18-25", {
   )
 })
 
-test_that("CKiD U25 extended continues past age 25", {
-  base <- egfr_ckid_u25_cr(1.0, 25, "female", height = 165)
-  ext <- egfr_ckid_u25_cr_extended(1.0, 28, "female", height = 165)
-  # extended kappa decays at 0.995^(age-25)
-  expect_lt(ext, base)
-})
-
 test_that("CAPA matches a known value", {
   # 130 * 1^-1.069 * 12^-0.117 - 7 ~= 90.2
   expect_equal(egfr_capa(1.0, 12), 90.2, tolerance = 0.1)

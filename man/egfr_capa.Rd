@@ -18,6 +18,13 @@ Numeric vector of eGFR in mL/min/1.73m^2.
 Estimates GFR from serum cystatin C using the Caucasian, Asian, paediatric,
 and adult (CAPA) equation (Grubb et al., 2014).
 }
+\section{Validity}{
+
+Derived in 4690 subjects spanning children and Caucasian and Asian adults,
+and intended for use across all ages. Note that CAPA is known to return
+implausibly high estimates in children under 10 years.
+}
+
 \examples{
 egfr_capa(cystatin = 1.0, age = 12)
 }
