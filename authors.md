@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/mhovd/egfr/blob/v2.0.0/inst/CITATION)
+[`inst/CITATION`](https://github.com/mhovd/egfr/blob/main/inst/CITATION)
 
 Hovd M (2026). *egfr: Estimated Glomerular Filtration Rate (eGFR)
 Calculators*.
