@@ -2,6 +2,8 @@
 
 ## egfr 2.0.0
 
+CRAN release: 2026-09-24
+
 This release corrects two equations that returned clinically wrong
 values for paediatric patients, and removes one function that
 implemented an experimental equation.
